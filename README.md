@@ -91,7 +91,7 @@ client/
 
 ## 🌐 Live Demo
 
-[StayVista Live](https://your-live-site-url.com)
+[StayVista Live](https://stayvista-live-2025-ce330.web.app/)
 
 ---
 
