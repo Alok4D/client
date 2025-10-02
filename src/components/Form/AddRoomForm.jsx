@@ -2,6 +2,7 @@ import { TbFidgetSpinner } from "react-icons/tb";
 import { categories } from "../Categories/CategoriesData";
 import { DateRange } from "react-date-range";
 
+
 const AddRoomForm = ({
   dates,
   handleDates,
@@ -12,6 +13,8 @@ const AddRoomForm = ({
   imageText,
   loading
 }) => {
+
+
   return (
     <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50">
       <form onSubmit={handleSubmit}>

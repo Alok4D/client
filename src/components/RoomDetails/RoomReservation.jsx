@@ -5,8 +5,13 @@ import { DateRange } from "react-date-range";
 import { differenceInCalendarDays } from "date-fns";
 import BookingModal from "../Modal/BookingModal";
 import useAuth from "../../hooks/useAuth";
+import useRole from "../../hooks/useRole";
 
 const RoomReservation = ({ room, refetch }) => {
+
+    const [role] = useRole();
+
+  
   const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -56,7 +61,8 @@ const RoomReservation = ({ room, refetch }) => {
       <hr />
       <div className="p-4">
         <Button
-          disabled={room?.booked === true}
+
+          disabled={room?.booked === true || role === "host"}
           onClick={() => setIsOpen(true)}
           label={room?.booked === true? "Booked" : 'Reserve'}
         />
