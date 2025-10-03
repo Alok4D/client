@@ -10,6 +10,24 @@ This project was built as part of a Junior MERN Stack Developer challenge to cre
 
 ---
 
+## 👤 User Roles & Demo Credentials
+
+### 🔑 Admin Access
+| Role   | Email                          | Password          |
+|--------|--------------------------------|-------------------|
+| 👑 Admin | `alokroy602701@gmail.com`      | `@stayVistaAdmin1` |
+
+### 🏠 Host Access
+| Role   | Email                          | Password          |
+|--------|--------------------------------|-------------------|
+| 🏡 Host | `alokroy2410@gmail.com`        | `@stayVistaHost1` |
+
+### 🙍 User Access
+| Role   | Email                          | Password          |
+|--------|--------------------------------|-------------------|
+| 🙋 User | `stayvistauser@gmail.com`      | `@stayVistaUser1` |
+
+---
 ## 🚀 Key Features
 
 ### Authentication & Profiles
@@ -34,6 +52,8 @@ This project was built as part of a Junior MERN Stack Developer challenge to cre
 - Manage users and roles  
 - Detailed profile pages for users  
 - Approve/reject host requests
+
+
 
 ### Notifications & Payments
 - Automatic email notifications for booking and user actions  
