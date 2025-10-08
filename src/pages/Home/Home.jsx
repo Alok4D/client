@@ -5,9 +5,8 @@ import Rooms from '../../components/Home/Rooms'
 const Home = () => {
   return (
     <div>
-      <Helmet>
-        <title>StayVista | Vacation Homes & Condo Rentals</title>
-      </Helmet>
+      <Helmet><title>StayVista | Vacation Homes & Condo Rentals</title></Helmet>
+      
       {/* Categories section  */}
       <Categories />
       {/* Rooms section */}

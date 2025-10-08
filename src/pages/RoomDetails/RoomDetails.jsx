@@ -79,7 +79,7 @@ console.log(room)
                 text-neutral-500
               '
                 >
-                  <div>{room?.guests} guests</div>
+                  <div>{room?.quests} guests</div>
                   <div>{room?.bedrooms} rooms</div>
                   <div>{room?.bathrooms} bathrooms</div>
                 </div>

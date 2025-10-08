@@ -16,6 +16,9 @@ import AdminRoute from "./AdminRoute";
 import HostRoute from "./HostRoute";
 import MyBookings from "../pages/Dashboard/Guest/MyBookings";
 import ManageBookings from "../pages/Dashboard/Host/ManageBookings";
+import Wishlist from "../components/wishlists/Wishlist";
+import Trips from "../components/trips/Trips";
+import Message from "../components/message/Message";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +29,18 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/wishlist",
+        element: <Wishlist/>,
+      },
+      {
+        path: "/trips",
+        element: <Trips/>,
+      },
+      {
+        path: "/message",
+        element: <Message/>,
       },
       {
         path: "/room/:id",

@@ -1,43 +1,42 @@
-import Container from "../Container";
-import { AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { AiOutlineMenu, AiFillHeart } from "react-icons/ai";
+import { FaUserCircle } from "react-icons/fa";
+import { MdOutlineTravelExplore } from "react-icons/md";
+import { IoMdMail } from "react-icons/io";
 import useAuth from "../../../hooks/useAuth";
-import avatarImg from "../../../assets/images/placeholder.jpg";
-import HostModal from "../../Modal/HostRequestModal";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import HostModal from "../../Modal/HostRequestModal";
+import avatarImg from "../../../assets/images/placeholder.jpg";
 import toast from "react-hot-toast";
+import Container from "../Container";
+import { FaHome, FaTachometerAlt } from "react-icons/fa";
+import { FiLogOut, FiLogIn, FiUserPlus } from "react-icons/fi";
 
 const Navbar = () => {
-  const axiosSecure = useAxiosSecure();
   const { user, logOut } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
-
-  // for modal
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const closeModal = () => setIsModalOpen(false);
 
   const modalHandler = async () => {
-    console.log("host i wanted!");
-
     try {
       const currentUser = {
         email: user?.email,
         role: "guest",
         status: "Requested",
       };
-      const { data } = await axiosSecure.put(`/user`, currentUser);
-      console.log(data);
+      const { data } = await axiosSecure.put("/user", currentUser);
+
       if (data.modifiedCount > 0) {
         toast.success("Success! Please wait for admin confirmation.");
       } else {
         toast.success("Success! Please wait for admin approval.");
       }
     } catch (err) {
-      console.log(err);
       toast.error(err.message);
     } finally {
       closeModal();
@@ -45,99 +44,158 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed w-full bg-white z-10 shadow-sm">
-      <div className="py-4 border-b-[1px]">
+    <div className="fixed w-full bg-white z-50 shadow-md">
+      <div className="py-4 border-b border-gray-200">
         <Container>
-          <div className="flex flex-row  items-center justify-between gap-3 md:gap-0">
+          <div className="flex items-center justify-between gap-3 md:gap-0">
             {/* Logo */}
             <Link to="/">
               <img
-                // className='hidden md:block'
                 src="https://i.ibb.co/4ZXzmq5/logo.png"
                 alt="logo"
-                width="100"
-                height="100"
+                className="w-24 md:w-28"
               />
             </Link>
-            {/* Dropdown Menu */}
-            <div className="relative">
-              <div className="flex flex-row items-center gap-3">
-                {/* Become A Host btn */}
-                <div className="hidden md:block">
-                  {/* {!user && ( */}
-                  <button
-                    // disabled={!user}
-                    onClick={() => setIsModalOpen(true)}
-                    className="disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-100 py-3 px-4 text-sm font-semibold rounded-full  transition"
-                  >
-                    Host your home
-                  </button>
-                  {/* )} */}
-                </div>
-                {/* Modal */}
-                <HostModal
-                  isOpen={isModalOpen}
-                  closeModal={closeModal}
-                  modalHandler={modalHandler}
-                />
 
-                {/* Dropdown btn */}
-                <div
-                  onClick={() => setIsOpen(!isOpen)}
-                  className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
+            {/* Right Side */}
+            <div className="flex items-center gap-4 relative">
+              {/* Become a Host Button */}
+              {user && (
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="hidden md:inline-block bg-[#e51d53] from-pink-500 to-orange-400 text-white px-5 py-2 rounded-full hover:scale-105 transform transition font-semibold shadow-md"
                 >
-                  <AiOutlineMenu />
-                  <div className="hidden md:block">
-                    {/* Avatar */}
+                  Host Your Home
+                </button>
+              )}
+              <HostModal
+                isOpen={isModalOpen}
+                closeModal={closeModal}
+                modalHandler={modalHandler}
+              />
+
+              {/* User Avatar with Tooltip */}
+              {user && (
+                <div
+                  className="relative"
+                  onMouseEnter={() => setShowTooltip(true)}
+                  onMouseLeave={() => setShowTooltip(false)}
+                >
+                  <Link to="/dashboard/profile">
                     <img
-                      className="rounded-full"
-                      referrerPolicy="no-referrer"
-                      src={user && user.photoURL ? user.photoURL : avatarImg}
+                      src={user.photoURL || avatarImg}
                       alt="profile"
-                      height="30"
-                      width="30"
+                      className="w-10 h-10 rounded-full border-2 border-pink-500 cursor-pointer hover:scale-105 transform transition"
+                      referrerPolicy="no-referrer"
                     />
-                  </div>
+                  </Link>
+                  {showTooltip && (
+                    <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-3 py-1 rounded-md shadow-lg whitespace-nowrap z-50">
+                      {user.displayName || "User"}
+                    </div>
+                  )}
                 </div>
+              )}
+
+              {/* Hamburger Menu */}
+              <div
+                onClick={() => setIsOpen(!isOpen)}
+                className="p-3 md:p-2 border border-gray-300 rounded-full cursor-pointer hover:shadow-lg transition transform hover:scale-105"
+              >
+                <AiOutlineMenu size={20} />
               </div>
+
+              {/* Dropdown Menu */}
               {isOpen && (
-                <div className="absolute rounded-xl shadow-md w-[40vw] md:w-[10vw] bg-white overflow-hidden right-0 top-12 text-sm">
-                  <div className="flex flex-col cursor-pointer">
+                <div className="absolute right-0 top-14 md:top-12 bg-white shadow-xl rounded-xl w-56 overflow-hidden z-50 animate-fade-in border border-gray-200">
+                  <div className="flex flex-col text-sm">
+                    {/* Home link for mobile */}
                     <Link
                       to="/"
-                      className="block md:hidden px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+                      className="flex items-center gap-2 px-4 py-3 hover:bg-gray-100 transition font-medium md:hidden"
+                      onClick={() => setIsOpen(false)} // ✅ close dropdown on click
                     >
-                      Home
+                      <FaHome className="text-gray-500" /> Home
                     </Link>
 
                     {user ? (
                       <>
+                        {/* Dashboard */}
                         <Link
                           to="/dashboard"
-                          className="block px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+                          className="flex items-center gap-2 px-4 py-3 hover:bg-gray-100 transition font-medium"
+                          onClick={() => setIsOpen(false)} // ✅ close dropdown
                         >
+                          <FaTachometerAlt className="text-blue-500" />{" "}
                           Dashboard
                         </Link>
-                        <div
-                          onClick={logOut}
-                          className="px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer"
+
+                        {/* Wishlist */}
+                        <Link
+                          to="/wishlist"
+                          className="flex items-center gap-2 px-4 py-3 hover:bg-pink-50 transition font-medium"
+                          onClick={() => setIsOpen(false)} // ✅ close dropdown
                         >
-                          Logout
-                        </div>
+                          <AiFillHeart className="text-pink-500" /> Wishlist
+                        </Link>
+
+                        {/* Trips */}
+                        <Link
+                          to="/trips"
+                          className="flex items-center gap-2 px-4 py-3 hover:bg-orange-50 transition font-medium"
+                          onClick={() => setIsOpen(false)} // ✅ close dropdown
+                        >
+                          <MdOutlineTravelExplore className="text-orange-500" />{" "}
+                          Trips
+                        </Link>
+
+                        {/* Messages */}
+                        <Link
+                          to="/message"
+                          className="flex items-center gap-2 px-4 py-3 hover:bg-green-50 transition font-medium"
+                          onClick={() => setIsOpen(false)} // ✅ close dropdown
+                        >
+                          <IoMdMail className="text-green-500" /> Messages
+                        </Link>
+
+                        {/* Profile */}
+                        <Link
+                          to="/dashboard/profile"
+                          className="flex items-center gap-2 px-4 py-3 hover:bg-purple-50 transition font-medium"
+                          onClick={() => setIsOpen(false)} // ✅ close dropdown
+                        >
+                          <FaUserCircle className="text-purple-500" /> Profile
+                        </Link>
+
+                        {/* Divider before Logout */}
+                        <div className="border-t border-gray-300 my-1"></div>
+
+                        {/* Logout */}
+                        <button
+                          onClick={() => {
+                            logOut();
+                            setIsOpen(false);
+                          }} // ✅ close dropdown on logout
+                          className="flex items-center gap-2 px-4 py-3 hover:bg-red-50 transition font-medium text-red-500"
+                        >
+                          <FiLogOut /> Logout
+                        </button>
                       </>
                     ) : (
                       <>
                         <Link
                           to="/login"
-                          className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+                          className="flex items-center gap-2 px-4 py-3 hover:bg-gray-100 transition font-medium"
+                          onClick={() => setIsOpen(false)}
                         >
-                          Login
+                          <FiLogIn className="text-blue-500" /> Login
                         </Link>
                         <Link
                           to="/signup"
-                          className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+                          className="flex items-center gap-2 px-4 py-3 hover:bg-gray-100 transition font-medium"
+                          onClick={() => setIsOpen(false)}
                         >
-                          Sign Up
+                          <FiUserPlus className="text-green-500" /> Sign Up
                         </Link>
                       </>
                     )}
