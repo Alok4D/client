@@ -19,6 +19,9 @@ import ManageBookings from "../pages/Dashboard/Host/ManageBookings";
 import Wishlist from "../components/wishlists/Wishlist";
 import Trips from "../components/trips/Trips";
 import Message from "../components/message/Message";
+import ContactUs from "../pages/Contact/ContactUs";
+import AboutUs from "../pages/aboutUs/AboutUs";
+import AllRooms from "../components/AllRooms/AllRooms";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +34,10 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/all-rooms",
+        element: <AllRooms/>,
+      },
+      {
         path: "/wishlist",
         element: <Wishlist/>,
       },
@@ -41,6 +48,14 @@ export const router = createBrowserRouter([
       {
         path: "/message",
         element: <Message/>,
+      },
+      {
+        path: "/contact",
+        element: <ContactUs/>,
+      },
+      {
+        path: "/aboutUs",
+        element: <AboutUs/>,
       },
       {
         path: "/room/:id",

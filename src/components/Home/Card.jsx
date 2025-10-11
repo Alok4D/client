@@ -85,40 +85,34 @@ const Card = ({ room }) => {
   return (
     <div className="col-span-1 relative group">
       <Link to={`/room/${room?._id}`} className="block">
-        <div className="flex flex-col gap-2 w-full relative">
+        <div className="relative">
           {/* Image Section */}
-          <div className="aspect-square w-full relative overflow-hidden rounded-xl">
-            <img
-              className="object-cover h-full w-full group-hover:scale-110 transition"
-              src={room?.image}
-              alt="Room"
-            />
+          <img
+            className="object-cover h-[250px] rounded-t-lg w-full group-hover:scale-105 transition"
+            src={room?.image}
+            alt="Room"
+          />
 
-            {/* Left Top: Guest Favorite */}
-            <div className="absolute top-3 left-3 bg-[#f4f4f4] px-2 py-1 rounded-md text-xs font-semibold shadow-md">
-              Guest favorite
-            </div>
+          {/* Left Top: Guest Favorite */}
+          <div className="absolute top-3 left-3 border bg-white/50 backdrop-blur-md px-2 py-1 rounded-md text-xs font-semibold shadow-md text-gray-800">
+            Guest favorite
+          </div>
 
-            {/* Right Top: Heart Icon */}
-            <div
-              onClick={handleWishlistToggle}
-              className={`absolute top-3 right-3 text-2xl cursor-pointer transition ${
-                isFavorite
-                  ? "text-pink-500"
-                  : "text-gray-100 hover:text-pink-500"
-              }`}
-            >
-              {isFavorite ? <GoHeartFill /> : <GoHeart />}
-            </div>
+          {/* Right Top: Heart Icon */}
+          <div
+            onClick={handleWishlistToggle}
+            className={`absolute top-3 right-3 text-2xl cursor-pointer transition ${
+              isFavorite ? "text-pink-500" : "text-gray-100 hover:text-pink-500"
+            }`}
+          >
+            {isFavorite ? <GoHeartFill /> : <GoHeart />}
           </div>
 
           {/* Room Info */}
-          <div className="font-semibold text-md">{room?.location}</div>
-
-          <div className="flex flex-row items-center gap-1">
-            <div className="font-semibold">${room?.price}</div>
-            <div className="font-light">for per nights.</div>
-          </div>
+          <h2 className="font-semibold lg:text-xl md:text-lg text-md mt-4">{room?.location}</h2>
+          <p className="font-semibold text-[#e51d53]">
+            ${room?.price} <span className="font-light text-gray-800">for per nights.</span>
+          </p>
         </div>
       </Link>
 
