@@ -12,7 +12,7 @@ const Card = ({ room }) => {
   const axiosSecure = useAxiosSecure();
   const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log("room data", room);
+  // console.log("room data", room);
 
   // ✅ Check if already in wishlist when component mounts
   useEffect(() => {
@@ -31,7 +31,7 @@ const Card = ({ room }) => {
   }, [room._id, user, axiosSecure]);
 
   // ❤️ Handle Add / Remove from Wishlist
-  const handleWishlistToggle = async (e) => {
+const handleWishlistToggle = async (e) => {
     e.preventDefault(); // prevent Link navigation
     if (!user) {
       toast.error("Please login first to use wishlist!");

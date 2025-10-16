@@ -1,5 +1,5 @@
 import Card from './Card'
-import Container from '../Shared/Container'
+// import Container from '../Shared/Container'
 import Heading from '../Shared/Heading'
 import LoadingSpinner from '../Shared/LoadingSpinner'
 import { useQuery } from '@tanstack/react-query'
@@ -13,7 +13,7 @@ const Rooms = () => {
   const [params, setParams] = useSearchParams();
   const category = params.get('category');
 
-  console.log(category);
+  console.log("cateogery data",category);
 
   const { data: rooms = [], isLoading } = useQuery({
     queryKey:['rooms', category],
@@ -27,7 +27,7 @@ const Rooms = () => {
   if (isLoading) return <LoadingSpinner />
 
   return (
-    <Container>
+    <div>
       {rooms && rooms.length > 0 ? (
         <div className='mt-12 mb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8'>
           {rooms?.map(room => (
@@ -43,7 +43,7 @@ const Rooms = () => {
           />
         </div>
       )}
-    </Container>
+    </div>
   )
 }
 

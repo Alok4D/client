@@ -18,7 +18,7 @@ const Navbar = () => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const localtion = useLocation();
-  console.log(localtion)
+  console.log(localtion);
 
   const closeModal = () => setIsModalOpen(false);
 
@@ -59,7 +59,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 px-2 lg:px-0 ${
         isScrolled
           ? "bg-white shadow-md text-gray-800"
           : "bg-transparent text-white"
@@ -76,27 +76,26 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav Links */}
-        <div className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <NavLink
-              key={link.path} 
-              to={link.path}
-              className={({ isActive }) =>
-                `font-semibold transition-all duration-300 ${
-                  isActive
-                    ? "text-yellow-600 border-b-2 border-yellow-600"
-                    : localtion.pathname
-                    ? "text-gray-800 hover:text-yellow-600"
-                    : "text-white hover:text-yellow-400" 
-                    
-                }`
-              }
-            >
-              {link.name}
-            </NavLink>
-          ))}
-         
-        </div>
+      <div className="hidden md:flex items-center gap-6">
+  {navLinks.map((link) => (
+    <NavLink
+      key={link.path}
+      to={link.path}
+      className={({ isActive }) =>
+        `font-semibold transition-all duration-300 ${
+          isActive
+            ? "text-yellow-600 border-b-2 border-yellow-600"
+            : isScrolled
+            ? "text-gray-800 hover:text-yellow-600"
+            : "text-black hover:text-yellow-400"
+        }`
+      }
+    >
+      {link.name}
+    </NavLink>
+  ))}
+</div>
+
 
         {/* Right Section */}
         <div className="flex items-center gap-4 relative">
@@ -105,7 +104,7 @@ const Navbar = () => {
             <div className="flex gap-2 md:gap-4">
               <Link
                 to="/login"
-                className={`px-4 py-1.5  font-semibold transition-all duration-300 ${
+                className={`lg:px-4 px-3 py-1.5  font-semibold transition-all duration-300 ${
                   isScrolled
                     ? "bg-yellow-600 text-white hover:bg-yellow-700"
                     : "bg-yellow-500 text-white hover:bg-yellow-600"
@@ -116,7 +115,7 @@ const Navbar = () => {
 
               <Link
                 to="/signup"
-                className={`px-4 py-1.5  border-2 font-semibold transition-all duration-300 ${
+                className={`lg:px-4 px-2 py-1.5  border-2 font-semibold transition-all duration-300 ${
                   isScrolled
                     ? "border-yellow-600 text-yellow-600 hover:bg-yellow-600 hover:text-white"
                     : "border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-white"
@@ -177,16 +176,27 @@ const Navbar = () => {
             </div>
           )}
 
+       
           {/* Dropdown Menu */}
           {user && isOpen && (
-            <div className="absolute right-0 top-14 md:top-12 bg-white shadow-xl rounded-xl w-56 overflow-hidden z-50 border border-gray-200">
+            <div
+              className={`absolute right-0 top-14 md:top-12 rounded-xl w-56 overflow-hidden z-50 border transition-all duration-300 ${
+                isScrolled
+                  ? "bg-white border-gray-200 shadow-xl"
+                  : "bg-gray-900/95 border-gray-700 shadow-lg"
+              }`}
+            >
               <div className="flex flex-col text-sm">
                 {navLinks.map((link) => (
                   <NavLink
                     key={link.path}
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center gap-2 px-4 py-3 hover:bg-gray-100 transition font-medium md:hidden"
+                    className={`flex items-center gap-2 px-4 py-3 font-medium md:hidden transition ${
+                      isScrolled
+                        ? "text-gray-800 hover:bg-gray-100"
+                        : "text-gray-100 hover:bg-gray-800"
+                    }`}
                   >
                     {link.name}
                   </NavLink>
@@ -194,21 +204,35 @@ const Navbar = () => {
 
                 <Link
                   to="/dashboard"
-                  className="flex items-center gap-2 px-4 py-3 hover:bg-gray-100 transition font-medium"
+                  className={`flex items-center gap-2 px-4 py-3 font-medium transition ${
+                    isScrolled
+                      ? "text-gray-800 hover:bg-gray-100"
+                      : "text-gray-100 hover:bg-gray-800"
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   <FaTachometerAlt className="text-blue-500" /> Dashboard
                 </Link>
+
                 <Link
                   to="/wishlist"
-                  className="flex items-center gap-2 px-4 py-3 hover:bg-pink-50 transition font-medium"
+                  className={`flex items-center gap-2 px-4 py-3 font-medium transition ${
+                    isScrolled
+                      ? "hover:bg-pink-50 text-gray-800"
+                      : "hover:bg-gray-800 text-gray-100"
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   <AiFillHeart className="text-pink-500" /> Wishlist
                 </Link>
+
                 <Link
                   to="/trips"
-                  className="flex items-center gap-2 px-4 py-3 hover:bg-orange-50 transition font-medium"
+                  className={`flex items-center gap-2 px-4 py-3 font-medium transition ${
+                    isScrolled
+                      ? "hover:bg-orange-50 text-gray-800"
+                      : "hover:bg-gray-800 text-gray-100"
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   <MdOutlineTravelExplore className="text-orange-500" /> Trips
@@ -216,18 +240,32 @@ const Navbar = () => {
 
                 <Link
                   to="/dashboard/profile"
-                  className="flex items-center gap-2 px-4 py-3 hover:bg-purple-50 transition font-medium"
+                  className={`flex items-center gap-2 px-4 py-3 font-medium transition ${
+                    isScrolled
+                      ? "hover:bg-purple-50 text-gray-800"
+                      : "hover:bg-gray-800 text-gray-100"
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   <FaUserCircle className="text-purple-500" /> Profile
                 </Link>
-                <div className="border-t border-gray-300 my-1"></div>
+
+                <div
+                  className={`my-1 border-t ${
+                    isScrolled ? "border-gray-300" : "border-gray-700"
+                  }`}
+                ></div>
+
                 <button
                   onClick={() => {
                     logOut();
                     setIsOpen(false);
                   }}
-                  className="flex items-center gap-2 px-4 py-3 hover:bg-red-50 transition font-medium text-red-500"
+                  className={`flex items-center gap-2 px-4 py-3 font-medium transition ${
+                    isScrolled
+                      ? "text-red-500 hover:bg-red-50"
+                      : "text-red-400 hover:bg-red-900/40"
+                  }`}
                 >
                   <FiLogOut /> Logout
                 </button>

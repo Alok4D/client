@@ -23,8 +23,8 @@ const Home = () => {
      <ThereCard/>
      <MasterRoom/>
       {/* <PopularDestinations/> */}
-      {/* Categories section  */}
-     
+    
+
       {/* <GuestFavorites/> */}
       <VideoTour/>
       <ServicesAmenities/>

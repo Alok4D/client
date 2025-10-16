@@ -13,7 +13,7 @@ const CategoryBox = ({ label, icon: Icon }) => {
     let currentQuery = { category: label };
 
     const url = queryString.stringifyUrl({
-      url: "/",
+      url: "/all-rooms",
       query: currentQuery,
     });
 

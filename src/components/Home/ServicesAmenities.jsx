@@ -25,7 +25,7 @@ const ServicesAmenities = () => {
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-5xl font-bold mb-4 text-[#222]"
         >
-          Our <span className="text-[#ff385c]">Services</span>
+          Our <span className="text-yellow-600">Services</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -46,7 +46,7 @@ const ServicesAmenities = () => {
               className="relative w-64 md:w-72 bg-white/20 backdrop-blur-xl border border-white/30 rounded-3xl p-6 shadow-lg hover:shadow-2xl cursor-pointer overflow-hidden"
             >
               {/* Icon Circle */}
-              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-tr from-[#ff385c] to-[#ff85a0] text-white text-2xl mb-4 mx-auto shadow-md">
+              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-tr from-yellow-600 to-yellow-600 text-white text-2xl mb-4 mx-auto shadow-md">
                 {service.icon}
               </div>
               {/* Title */}

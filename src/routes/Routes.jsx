@@ -22,6 +22,7 @@ import Message from "../components/message/Message";
 import ContactUs from "../pages/Contact/ContactUs";
 import AboutUs from "../pages/aboutUs/AboutUs";
 import AllRooms from "../components/AllRooms/AllRooms";
+import BlogDetails from "../components/Home/BlogDetails";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "/all-rooms",
         element: <AllRooms/>,
+      },
+      {
+        path: "/blog-details/:id",
+        element: <BlogDetails/>,
       },
       {
         path: "/wishlist",

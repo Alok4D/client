@@ -37,7 +37,6 @@ const testimonials = [
 export default function Testimonials() {
   const [index, setIndex] = useState(0);
 
-  // Auto-slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 2) % testimonials.length);
@@ -56,30 +55,30 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="py-20 px-6 md:px-20  ">
+    <section className="py-12 px-4 sm:px-6 md:px-12 lg:px-20">
       <div className="container mx-auto">
         {/* Header */}
-        <div className="flex justify-between items-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 sm:mb-12">
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-4 sm:mb-0">
             Every Stay Has A Story
           </h2>
-          <div className="flex gap-3">
+          <div className="flex justify-center sm:justify-end items-center gap-2 sm:gap-3 w-full sm:w-auto">
             <button
               onClick={prevSlide}
-              className="bg-white hover:bg-gray-100 p-3 rounded-full shadow-md hover:shadow-lg transition-all"
+              className="bg-white hover:bg-gray-100 p-2 sm:p-3 rounded-full shadow-md hover:shadow-lg transition-all"
             >
-              <MdArrowBackIosNew className="text-gray-600 text-lg" />
+              <MdArrowBackIosNew className="text-gray-600 text-base sm:text-lg" />
             </button>
             <button
               onClick={nextSlide}
-              className="bg-white hover:bg-gray-100 p-3 rounded-full shadow-md hover:shadow-lg transition-all"
+              className="bg-white hover:bg-gray-100 p-2 sm:p-3 rounded-full shadow-md hover:shadow-lg transition-all"
             >
-              <MdArrowForwardIos className="text-gray-600 text-lg" />
+              <MdArrowForwardIos className="text-gray-600 text-base sm:text-lg" />
             </button>
           </div>
         </div>
 
-        {/* Testimonials Row */}
+        {/* Testimonials */}
         <div className="relative overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
@@ -93,10 +92,10 @@ export default function Testimonials() {
               {getVisibleTestimonials().map((t) => (
                 <motion.div
                   key={t.id}
-                  className="w-full sm:w-1/2 flex flex-col p-6  rounded-3xl border-2 transition-all border-l-4 border-yellow-400"
+                  className="w-full sm:w-1/2 flex flex-col p-6 rounded-3xl border-l-4 border-yellow-400 border-2 transition-all"
                   whileHover={{ scale: 1.03 }}
                 >
-                  {/* Stars + Description */}
+                  {/* Stars + Text */}
                   <div className="flex-1 mb-4">
                     <div className="flex mb-2">
                       {[...Array(5)].map((_, i) => (
@@ -109,7 +108,7 @@ export default function Testimonials() {
                     <p className="text-gray-700 leading-relaxed">{t.text}</p>
                   </div>
 
-                  {/* Avatar + Name/Title on one row */}
+                  {/* Avatar + Name */}
                   <div className="flex items-center gap-4 mt-4">
                     <img
                       src={t.image}

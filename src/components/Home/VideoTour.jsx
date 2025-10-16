@@ -186,7 +186,7 @@ export default function VideoHeroSlider() {
   };
 
   return (
-    <section className="relative w-full h-[583px] overflow-hidden mt-8">
+    <section className="relative w-full lg:h-[583px] h-[530px] overflow-hidden mt-8">
       {/* Slides */}
       {slides.map((slide, index) => (
         <div

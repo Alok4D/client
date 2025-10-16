@@ -25,37 +25,40 @@ const serviceData = [
 ];
 
 const FeatureCard = ({ title, description, image }) => (
-    <div className="flex flex-col -mt-48 z-40">
+    <div className="hidden md:block lg:block z-40">
+          <div className="flex flex-col -mt-48">
         {/* Image - Uses object-cover for responsive fitting, aspect-ratio to control height */}
         <div className="w-full overflow-hidden mb-4 aspect-w-3 aspect-h-2">
             <img 
                 src={image} 
                 alt={title} 
-                className="w-full h-[221px] object-cover transition-transform duration-500 hover:scale-105"
+                className="w-full  h-[221px] object-cover transition-transform duration-500 hover:scale-105"
             />
         </div>
         
         {/* Title - Bold and slightly larger than body text */}
-        <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
+        <h3 className="lg:text-2xl md:text-xl font-bold text-gray-800 mb-3">
             {title}
         </h3>
         
         {/* Description - Standard body text */}
-        <p className="text-gray-600 leading-relaxed text-base">
+        <p className="text-gray-600 leading-relaxed  lg:text-base md:text-sm">
             {description}
         </p>
     </div>
+    </div>
+  
 );
 
 export default function ThereCard() {
     return (
-        <section className="py-16 px-4 sm:px-8 md:px-12 lg:px-20 bg-white">
+        <section className=" lg:py-16 md:py-8 py-4 px-4 sm:px-8 md:px-12 lg:px-20 bg-white">
             <div className="max-w-7xl mx-auto">
                 {/* 3-Column Grid Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-x-8 gap-y-12">
                     {serviceData.map(service => (
                         <FeatureCard 
-                            key={service.id} 
+                            key={service.id}
                             title={service.title} 
                             description={service.description}
                             image={service.image}
