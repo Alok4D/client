@@ -15,7 +15,7 @@ This project was built as part of a Junior MERN Stack Developer challenge to cre
 ### 🔑 Admin Access
 | Role   | Email                          | Password          |
 |--------|--------------------------------|-------------------|
-| 👑 Admin | `alokroy602701@gmail.com`      | `@stayVistaAdmin1` |
+| 👑 Admin | `stayvistaadmin@gmail.com`      | `@stayVistaAdmin1` |
 
 ### 🏠 Host Access
 | Role   | Email                          | Password          |
